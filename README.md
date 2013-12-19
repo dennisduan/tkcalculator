@@ -1,5 +1,7 @@
 #A simple Tkinter based Calculator
 
+##Introduction
+
 It can be used to show how to build test automation. Basically you can use it to:
 
 1. It's buggy so you can use it to train new testers to design test cases;
@@ -12,3 +14,7 @@ TODO:
 
 1. Create full coverage tests (unit tests)
 2. Create UI level automation
+
+##How to launch application
+
+`python main.py`
