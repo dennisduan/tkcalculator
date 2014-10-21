@@ -32,9 +32,20 @@ class TestCalBus(unittest.TestCase):
 		self.assertEqual("45*2", self._bus.send_user_input(2))
 		self.assertEqual("90", self._bus.send_user_input('='))
 		self.assertEqual("90/", self._bus.send_user_input('/'))
-		self.assertEqual("90/1", self._bus.send_user_input('1'))
-		self.assertEqual("90/10", self._bus.send_user_input('0'))
+		self.assertEqual("90/1", self._bus.send_user_input(1))
+		self.assertEqual("90/10", self._bus.send_user_input(0))
 		self.assertEqual("9", self._bus.send_user_input('='))
+
+	def testLongExpression(self):
+		self.assertEqual("1", self._bus.send_user_input(1))
+		self.assertEqual("12", self._bus.send_user_input(2))
+		self.assertEqual("12*", self._bus.send_user_input('*'))
+		self.assertEqual("12*3", self._bus.send_user_input(3))
+		self.assertEqual("12*3-", self._bus.send_user_input('-'))
+		self.assertEqual("12*3-6", self._bus.send_user_input(6))
+		self.assertEqual("12*3-6/", self._bus.send_user_input('/'))
+		self.assertEqual("12*3-6/2", self._bus.send_user_input(2))
+		self.assertEqual("33", self._bus.send_user_input('='))
 
 	def testClearBus(self):
 		self._bus.clear_bus()
