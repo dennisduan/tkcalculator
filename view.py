@@ -38,7 +38,7 @@ class CalView(object):
     	root.mainloop()
         
     def clearResult(self):
-    	model.CalBus().clearBus()
+    	model.CalBus().clear_bus()
     	self._label.set("")
 
 
