@@ -49,12 +49,12 @@ class CalBus(object):
 			return retvalue
 
 	def _cal_result(self):
-            if (len(self._bus) != 3 or not type(self._bus[0]) == int \
-                        or not type(self._bus[2]) == int):
-                return "Error"
-            else:
-		        return str(self.ops[self._bus[1]](self._bus[0], self._bus[2]))
+            try:
+                    return str(eval(self._show_expression()))
+            except SyntaxError:
+                    return 'Error'
 
 	def _show_expression(self):
-		newbus = [str(x) for x in self._bus]
-		return "".join(newbus)
+		new_bus = [str(x) for x in self._bus]
+		return "".join(new_bus)
+
