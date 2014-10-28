@@ -17,7 +17,7 @@ def singleton(class_):
 class CalBus(object):
 	def __init__(self):
 		self.ops = {'+':add, '-':sub, '*':mul, '/':div}
-		self.ops_allowed = "+-*/="
+		self.ops_allowed = "+-*/=C"
 		self._bus = []
 
 	def clear_bus(self):
@@ -39,6 +39,9 @@ class CalBus(object):
 				ret = self._cal_result()
 				self._bus = [ret]	
 				retvalue = str(ret)
+			elif user_input == 'C':
+				self.clear_bus()
+				retvalue = ""
 			else:
 				if (len(self._bus)>0) and type(self._bus[-1]) is int \
 					and user_input in range(0,10):

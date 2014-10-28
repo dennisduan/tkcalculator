@@ -2,4 +2,5 @@ import view
 
 
 if __name__ == '__main__':
-    view.CalView()
+    v = view.CalView()
+    v.show()

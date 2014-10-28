@@ -6,26 +6,27 @@ import model
 
 class CalView(object):
     def __init__(self):
+        self._bus = model.CalBus()
         
-    	root = Tkinter.Tk()
+    	self.root = Tkinter.Tk()
     	v = Tkinter.StringVar()
     	self._label = v
-    	ResultLabel = Tkinter.Label(root, textvariable=self._label, font="Times 16 bold")
+    	ResultLabel = Tkinter.Label(self.root, textvariable=self._label, font="Times 16 bold")
     	ResultLabel.grid(row=0, column=0)
 
     	controls = []
 
     	#create digital buttons
     	for i in range(0,10):
-    		btn = Tkinter.Button(root, text=str(i), command=partial(self.basic_cmd, i))
+    		btn = Tkinter.Button(self.root, text=str(i), command=partial(self.basic_cmd, i))
     		controls.append(btn)
     	#create operators buttons
-    	for c in '+-*/=':
-    		btn = Tkinter.Button(root, text=c, command=partial(self.basic_cmd, c))
+    	for c in '+-*/=C':
+    		btn = Tkinter.Button(self.root, text=c, command=partial(self.basic_cmd, c))
     		controls.append(btn)
     	#create clear button
-    	btn = Tkinter.Button(root, text="C", command=self.clearResult)
-    	controls.append(btn)
+        #btn = Tkinter.Button(self.root, text="C", command=self.clearResult)
+        #controls.append(btn)
 	
     	#align controls and pack them
     	for i in range(0, 4):
@@ -34,13 +35,17 @@ class CalView(object):
     				 break
     			controls[i*4+j].grid(row=i+1, column=j)
 
+    def show(self):
     	#main loop
-    	root.mainloop()
+    	self.root.mainloop()
+
+    # DI, allow insert a new instance to mock the real bus instance
+    def setCalBus(self, bus):
+        self._bus = bus
         
     def clearResult(self):
-    	model.CalBus().clear_bus()
+    	self._bus.clear_bus()
     	self._label.set("")
 
-
     def basic_cmd(self, inp):
-    	self._label.set(model.CalBus().send_user_input(inp))
+    	self._label.set(self._bus.send_user_input(inp))
